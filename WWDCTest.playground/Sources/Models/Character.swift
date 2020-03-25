@@ -14,9 +14,9 @@ public class Character : SKSpriteNode {
     init(textureName: String) {
         level = 1
         hp = 10 * level
-        attack1 = Action(points: 3, waitingTimer: 0)
-        attack2 = Action(points: 6, waitingTimer: 3)
-        shield = Action(points: 3, waitingTimer: 2)
+        attack1 = Action(points: 1, waitingTimer: 0)
+        attack2 = Action(points: 3, waitingTimer: 3)
+        shield = Action(points: 2, waitingTimer: 2)
         
         let texture = SKTexture(imageNamed: textureName)
         super.init(texture: texture, color: UIColor.clear, size: texture.size())
@@ -71,9 +71,9 @@ public class Character : SKSpriteNode {
     }
     
     public func levelUp() {
-        attack1.points = 3/10 * hp
-        attack2.points = 5/10 * hp
-        shield.points = 3/10 * hp
+        attack1.points *= hp
+        attack2.points *= hp
+        shield.points *= hp
     }
 }
 

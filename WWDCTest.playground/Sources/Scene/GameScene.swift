@@ -63,7 +63,7 @@ public class GameScene: SKScene, BaseScene {
         defendButton.setScale(1.5)
         self.addChild(defendButton)
         
-        enemy[0].position = CGPoint(x: width/8, y: height/1.5)
+        enemy[0].position = CGPoint(x: width/1.1, y: height/1.5)
         currentEnemy = enemy[0]
         self.addChild(enemy[0])
         
@@ -118,12 +118,15 @@ extension GameScene {
                 currentEnemy!.hited(damage: playerDamage)
                 print("\nTurn Passed\n")
                 player.rechargeAbilitys()
-            } else {
-                
             }
             //Passar o turno
             
         case "Defend Button":
+            /*
+             Ativar habilidade, aumentar vida temporariamente, rechargeAbilitys
+             */
+            
+            
             self.player.defend(damage: 5)
             print("\nTurn Passed\n")
             //Passar o turno
