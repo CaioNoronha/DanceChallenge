@@ -4,6 +4,8 @@ public class GameScene: SKScene, BaseScene {
     
     //Sprites
     var player: Character
+    var enemy = [Character(textureName: "Enemy1")]
+    var currentEnemy: Character?
     var attackButton1: SKSpriteNode
     var attackButton2: SKSpriteNode
     var defendButton: SKSpriteNode
@@ -33,7 +35,7 @@ public class GameScene: SKScene, BaseScene {
         super.init(size: size)
         setUpScene()
     }
-    
+     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -47,14 +49,23 @@ public class GameScene: SKScene, BaseScene {
         self.addChild(playLabel)
         
         attackButton1.name = "Attack Button 1"
-        attackButton1.position = CGPoint(x: width/2, y: height/4)
+        attackButton1.position = CGPoint(x: width/2.4, y: height/4)
         attackButton1.setScale(1.5)
         self.addChild(attackButton1)
         
         attackButton2.name = "Attack Button 2"
-        attackButton2.position = CGPoint(x: width/1.5, y: height/4)
+        attackButton2.position = CGPoint(x: width/1.71, y: height/4)
         attackButton2.setScale(1.5)
         self.addChild(attackButton2)
+        
+        defendButton.name = "Defend Button"
+        defendButton.position = CGPoint(x: width/2, y: height/6.5)
+        defendButton.setScale(1.5)
+        self.addChild(defendButton)
+        
+        enemy[0].position = CGPoint(x: width/8, y: height/1.5)
+        currentEnemy = enemy[0]
+        self.addChild(enemy[0])
         
         player.position = CGPoint(x: width/4, y: height/4)
         self.addChild(player)
@@ -93,15 +104,35 @@ extension GameScene {
         // The knot is in that position now
         let touchedNode = self.atPoint(positionInScene!)
         
-        if touchedNode.name == "Attack Button 1" {
-            print("Atacou com o ataque 1!")
+        switch touchedNode.name {
+        case "Attack Button 1":
+            currentEnemy!.hited(damage: self.player.attack(1))
+            print("\nTurn Passed\n")
+            //Passar o turno
+            player.rechargeAbilitys()
+            //Vez do Inimigo
+            
+        case "Attack Button 2":
+            let playerDamage = self.player.attack(2)
+            if playerDamage > 0 {
+                currentEnemy!.hited(damage: playerDamage)
+                print("\nTurn Passed\n")
+                player.rechargeAbilitys()
+            } else {
+                
+            }
+            //Passar o turno
+            
+        case "Defend Button":
+            self.player.defend(damage: 5)
+            print("\nTurn Passed\n")
+            //Passar o turno
+            player.rechargeAbilitys()
+
+        default:
+            print("Nothing detected!")
+            startGame()
         }
-        
-        if touchedNode.name == "Attack Button 2" {
-            print("Atacou com o ataque 2!")
-        }
-        
-        startGame()
     }
 }
 

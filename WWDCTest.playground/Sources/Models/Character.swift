@@ -27,16 +27,19 @@ public class Character : SKSpriteNode {
     }
     
     //Methods
-    public func attack(type: Int) -> Int {
+    public func attack(_ type: Int) -> Int {
         
         if type == 2 {
             if attack2.isAvaiable {
+                print("Damage 2:", attack2.points)
                 attack2.isAvaiable = false
                 return attack2.points
             } else {
-                return -1
+                print("Damage 2: Charging")
+                return 0
             }
         }
+        print("Damage 1:", attack1.points)
         return attack1.points
     }
     
@@ -47,6 +50,18 @@ public class Character : SKSpriteNode {
             }
             shield.isAvaiable = false
         }
+    }
+    
+    public func hited(damage: Int) {
+        if damage >= hp {
+            die()
+        } else {
+            hp -= damage
+        }
+    }
+    
+    private func die() {
+        self.alpha =  0.0
     }
     
     
