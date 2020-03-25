@@ -2,7 +2,20 @@ import SpriteKit
 
 protocol BaseScene {
     var sceneManager: SceneTransitionDelegate? { get set }
+//    var width : CGFloat { get set }
+//    var height: CGFloat { get set }
 }
+
+//extension BaseScene {
+//    var width: CGFloat {
+//        return self.size.width
+//    }
+//    var height: CGFloat {
+//        return self.size.height
+//    }
+//}
+
+
 public enum SceneIdentifier {
     case initialScene, gameScene, pauseScene, endScene
 }

@@ -50,12 +50,13 @@ public class InitialScene: SKScene, BaseScene {
     }
 }
 
-extension GameScene {
+extension InitialScene {
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
         startGame()
+        print("estou aqui")
     }
 }
 

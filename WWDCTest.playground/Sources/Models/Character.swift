@@ -11,13 +11,14 @@ public class Character : SKSpriteNode {
     fileprivate var shield : Action
     
     //Constructor
-    init(texture: SKTexture) {
+    init(textureName: String) {
         level = 1
         hp = 10 * level
         attack1 = Action(points: 3, waitingTimer: 0)
         attack2 = Action(points: 6, waitingTimer: 3)
         shield = Action(points: 3, waitingTimer: 2)
         
+        let texture = SKTexture(imageNamed: textureName)
         super.init(texture: texture, color: UIColor.clear, size: texture.size())
     }
     
