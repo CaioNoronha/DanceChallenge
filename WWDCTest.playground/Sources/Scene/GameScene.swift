@@ -4,7 +4,7 @@ public class GameScene: SKScene, BaseScene {
     
     //Sprites
     var player: Character
-    var enemy = [Character(textureName: "Enemy1")]
+    var enemys = [Character(name: "Enemy1")]
     var currentEnemy: Character?
     var attackButton1: SKSpriteNode
     var attackButton2: SKSpriteNode
@@ -25,7 +25,7 @@ public class GameScene: SKScene, BaseScene {
     //Constructor
     public override init(size: CGSize) {
         playLabel = SKLabelNode(text: "Oin, to no jogo")
-        player = Character(textureName: "Personagem")
+        player = Character(name: "Personagem")
         
         attackButton1 = SKSpriteNode(imageNamed: "AttackButton")
         attackButton2 = SKSpriteNode(imageNamed: "AttackButton")
@@ -63,12 +63,12 @@ public class GameScene: SKScene, BaseScene {
         defendButton.setScale(1.5)
         self.addChild(defendButton)
         
-        enemy[0].position = CGPoint(x: width/1.1, y: height/1.5)
-        currentEnemy = enemy[0]
-        self.addChild(enemy[0])
+        enemys[0].node.position = CGPoint(x: width/1.1, y: height/1.5)
+        currentEnemy = enemys[0]
+        self.addChild(enemys[0].node)
         
-        player.position = CGPoint(x: width/4, y: height/4)
-        self.addChild(player)
+        player.node.position = CGPoint(x: width/4, y: height/4)
+        self.addChild(player.node)
         
         //self.backgroundColor = .blue
         background.zPosition = -1
@@ -105,35 +105,35 @@ extension GameScene {
         let touchedNode = self.atPoint(positionInScene!)
         
         switch touchedNode.name {
-        case "Attack Button 1":
-            currentEnemy!.hited(damage: self.player.attack(1))
-            print("\nTurn Passed\n")
+        case "Attack Button 1": break
+            //currentEnemy!.hited(damage: self.player.attack(1))
+            //print("\nTurn Passed\n")
             //Passar o turno
-            player.rechargeAbilitys()
+            //player.rechargeAbilitys()
             //Vez do Inimigo
             
-        case "Attack Button 2":
-            let playerDamage = self.player.attack(2)
-            if playerDamage > 0 {
-                currentEnemy!.hited(damage: playerDamage)
-                print("\nTurn Passed\n")
-                player.rechargeAbilitys()
-            }
+        case "Attack Button 2": break
+            //let playerDamage = self.player.attack(2)
+            //if playerDamage > 0 {
+            //    currentEnemy!.hited(damage: playerDamage)
+            //    print("\nTurn Passed\n")
+            //    player.rechargeAbilitys()
+            //}
             //Passar o turno
             
-        case "Defend Button":
+        case "Defend Button": break
             /*
              Ativar habilidade, aumentar vida temporariamente, rechargeAbilitys
              */
             
             
-            self.player.defend(damage: 5)
-            print("\nTurn Passed\n")
+            //self.player.defend(damage: 5)
+            //print("\nTurn Passed\n")
             //Passar o turno
-            player.rechargeAbilitys()
+            //player.rechargeAbilitys()
 
         default:
-            print("Nothing detected!")
+            //print("Nothing detected!")
             startGame()
         }
     }
