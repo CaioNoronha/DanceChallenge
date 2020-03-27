@@ -1,107 +1,111 @@
 import SpriteKit
-import UIKit
 
-public class Character : SKSpriteNode {
+
+
+
+public class Character {
     
     //Attributes
-    var level: Int
-    var hp: Int
-    fileprivate var attack1 : Action
-    fileprivate var attack2 : Action
-    fileprivate var shield : Action
-    
-    //Constructor
-    init(textureName: String) {
-        level = 1
-        hp = 10 * level
-        attack1 = Action(points: 1, waitingTimer: 0)
-        attack2 = Action(points: 3, waitingTimer: 3)
-        shield = Action(points: 2, waitingTimer: 2)
-        
-        let texture = SKTexture(imageNamed: textureName)
-        super.init(texture: texture, color: UIColor.clear, size: texture.size())
+    var node: SKSpriteNode
+    var isAlive: Bool
+    private var hp: Int
+    private var level: Int
+    private var especialAttack: CustomAction
+    private var shield: CustomAction
+    private var simpleDamage: Int {
+        return level * 2
+    }
+    private var especialDamage: Int {
+        return level * 5
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    init(name: String, level: Int) {
+        node = SKSpriteNode(imageNamed: "name")
+        node.name = name
+        self.level = level
+        self.hp = 15 * level
+        self.especialAttack = CustomAction(3)
+        self.shield = CustomAction(2)
+        self.isAlive = true
     }
     
-    //Methods
+    
     public func attack(_ type: Int) -> Int {
+        if type == 1 {
+            print("\(name) used Simple Attack!")
+            return simpleDamage
+        }
         
-        if type == 2 {
-            if attack2.isAvaiable {
-                print("Damage 2:", attack2.points)
-                attack2.isAvaiable = false
-                return attack2.points
-            } else {
-                print("Damage 2: Charging")
-                return 0
-            }
+        if especialAttack.use() {
+            print("\(name) used Especial Attack!")
+            return especialDamage
         }
-        print("Damage 1:", attack1.points)
-        return attack1.points
+        print("\(name) is Reloading!")
+        return 0
     }
     
-    public func defend(damage: Int) {
-        if shield.isAvaiable {
-            if damage > shield.points {
-                hp -= damage - shield.points
-            }
-            shield.isAvaiable = false
+    public func defend() -> Int {
+        if shield.use() {
+            print("\(name) used Shield!")
+            return 1
         }
+        print("\(name) is Reloading!")
+        return 0
     }
     
-    public func hited(damage: Int) {
-        if damage >= hp {
-            die()
+    public func hit(damage: Int) {
+        if shield.onUsing {
+            hp -= damage/level*2
         } else {
             hp -= damage
         }
+        if hp <= 0 {
+            isAlive = false
+        }
     }
     
-    private func die() {
-        self.alpha =  0.0
-    }
-    
-    
-    public func rechargeAbilitys() {
-        attack2.recharge()
-        shield.recharge()
+    public func reloadAbilitys() {
+        especialAttack.reload()
+        shield.reload()
     }
     
     public func levelUp() {
-        attack1.points *= hp
-        attack2.points *= hp
-        shield.points *= hp
+        level += 1
+        hp = 15 * level
+    }
+    
+    
+}
+
+public struct CustomAction {
+    
+    private var timeToLoad: Int
+    private var load: Int
+    var onUsing: Bool
+    
+    init(_ timeToLoad: Int) {
+        self.timeToLoad = timeToLoad
+        self.load = timeToLoad
+        self.onUsing = true
+    }
+    
+    public mutating func use() -> Bool {
+        if !onUsing {
+            load = 0
+            onUsing = true
+            return true
+        }
+        return false
+    }
+    
+    public mutating func reload() {
+        if load != timeToLoad {
+            load += 1
+            return
+        }
+        onUsing = false
     }
 }
 
-fileprivate class Action {
-    
-    //Attributes
-    var points: Int
-    var waitingTimer: Int
-    var timer: Int
-    var isAvaiable: Bool
-        
-    //Constructor
-    init(points: Int, waitingTimer: Int) {
-        self.points = points
-        self.waitingTimer = waitingTimer
-        self.timer = 0
-        self.isAvaiable = true
-    }
-    
-    //Methods
-    public func recharge() {
-        if !isAvaiable {
-            timer += 1
-            if timer == waitingTimer {
-                timer = 0
-                isAvaiable = true
-            }
-        }
-    }
-}
+
 

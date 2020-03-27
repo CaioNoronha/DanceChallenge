@@ -70,12 +70,12 @@ public class SceneManager : SceneTransitionDelegate {
             return gameScene
             
         case .pauseScene:
-            let pauseScene = GameScene(size: viewSize)
+            let initial = InitialScene(size: viewSize)
             pauseScene.sceneManager = self
             return pauseScene
             
         case .endScene:
-            let endScene = GameScene(size: viewSize)
+            let initial = InitialScene(size: viewSize)
             endScene.sceneManager = self
             return endScene
         }

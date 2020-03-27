@@ -3,9 +3,6 @@ import SpriteKit
 public class GameScene: SKScene, BaseScene {
     
     //Sprites
-    var player: Character
-    var enemy = [Character(textureName: "Enemy1")]
-    var currentEnemy: Character?
     var attackButton1: SKSpriteNode
     var attackButton2: SKSpriteNode
     var defendButton: SKSpriteNode
@@ -19,19 +16,17 @@ public class GameScene: SKScene, BaseScene {
     var height: CGFloat {
         return self.size.height
     }
-    var playLabel: SKLabelNode
+    var battle: Battle
     var sceneManager: SceneTransitionDelegate?
     
     //Constructor
-    public override init(size: CGSize) {
-        playLabel = SKLabelNode(text: "Oin, to no jogo")
-        player = Character(textureName: "Personagem")
-        
+    public init(size: CGSize, battle: Battle, background: SKSpriteNode) {
         attackButton1 = SKSpriteNode(imageNamed: "AttackButton")
         attackButton2 = SKSpriteNode(imageNamed: "AttackButton")
         defendButton = SKSpriteNode(imageNamed: "DefendButton")
+        self.battle = battle
+        self.background = background
         
-        background = SKSpriteNode(imageNamed: "Lente Negra")
         super.init(size: size)
         setUpScene()
     }
@@ -43,11 +38,6 @@ public class GameScene: SKScene, BaseScene {
     //Methods
     
     func setUpScene() {
-        playLabel.position = CGPoint(x: width/2, y: height/3)
-        playLabel.fontName = "Pixel Tactical"
-        playLabel.fontSize = 18
-        self.addChild(playLabel)
-        
         attackButton1.name = "Attack Button 1"
         attackButton1.position = CGPoint(x: width/2.4, y: height/4)
         attackButton1.setScale(1.5)
@@ -63,32 +53,22 @@ public class GameScene: SKScene, BaseScene {
         defendButton.setScale(1.5)
         self.addChild(defendButton)
         
-        enemy[0].position = CGPoint(x: width/1.1, y: height/1.5)
-        currentEnemy = enemy[0]
-        self.addChild(enemy[0])
+        battle.enemy.node.position = CGPoint(x: width/1.1, y: height/1.5)
+        self.addChild(battle.enemy.node)
         
-        player.position = CGPoint(x: width/4, y: height/4)
+        battle.player.node.position = CGPoint(x: width/4, y: height/4)
         self.addChild(player)
         
-        //self.backgroundColor = .blue
         background.zPosition = -1
         background.position = CGPoint(x: width/2, y: height/2)
-        //self.addChild(background)
+        self.addChild(background)
         
         animate()
         
     }
     
-    func animate() {
-        let actionArray = [
-            SKAction.fadeAlpha(to: 0.4, duration: 0.8),
-            SKAction.fadeAlpha(to: 1, duration: 0.8)]
-        
-        playLabel.run(SKAction.repeatForever(SKAction.sequence(actionArray)))
-    }
-    
     func startGame() {
-        sceneManager?.transitionToScene(.initialScene)
+        //sceneManager?.transitionToScene(.initialScene)
     }
 }
 
@@ -106,32 +86,12 @@ extension GameScene {
         
         switch touchedNode.name {
         case "Attack Button 1":
-            currentEnemy!.hited(damage: self.player.attack(1))
-            print("\nTurn Passed\n")
-            //Passar o turno
-            player.rechargeAbilitys()
-            //Vez do Inimigo
-            
+            battle.playerAct(.attack1)
         case "Attack Button 2":
-            let playerDamage = self.player.attack(2)
-            if playerDamage > 0 {
-                currentEnemy!.hited(damage: playerDamage)
-                print("\nTurn Passed\n")
-                player.rechargeAbilitys()
-            }
-            //Passar o turno
-            
+            battle.playerAct(.attack2)
         case "Defend Button":
-            /*
-             Ativar habilidade, aumentar vida temporariamente, rechargeAbilitys
-             */
-            
-            
-            self.player.defend(damage: 5)
-            print("\nTurn Passed\n")
-            //Passar o turno
-            player.rechargeAbilitys()
-
+            battle.playerAct(.defend)
+           
         default:
             print("Nothing detected!")
             startGame()
