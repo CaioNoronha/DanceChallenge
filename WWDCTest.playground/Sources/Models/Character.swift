@@ -32,24 +32,24 @@ public class Character {
     
     public func attack(_ type: Int) -> Int {
         if type == 1 {
-            print("\(name) used Simple Attack!")
+            print("\(node.name) used Simple Attack!")
             return simpleDamage
         }
         
         if especialAttack.use() {
-            print("\(name) used Especial Attack!")
+            print("\(node.name) used Especial Attack!")
             return especialDamage
         }
-        print("\(name) is Reloading!")
+        print("\(node.name) is Reloading!")
         return 0
     }
     
     public func defend() -> Int {
         if shield.use() {
-            print("\(name) used Shield!")
+            print("\(node.name) used Shield!")
             return 1
         }
-        print("\(name) is Reloading!")
+        print("\(node.name) is Reloading!")
         return 0
     }
     

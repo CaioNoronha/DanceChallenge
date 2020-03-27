@@ -1,12 +1,22 @@
 import SpriteKit
 
+public protocol Observer: class {
+    func finishBattle()
+}
+
+extension GameScene: Observer {
+    public func finishBattle() {
+        sceneManager?.transitionToScene(.initialScene)
+    }
+}
+
 public class GameScene: SKScene, BaseScene {
     
     //Sprites
     var attackButton1: SKSpriteNode
     var attackButton2: SKSpriteNode
     var defendButton: SKSpriteNode
-    var background: SKSpriteNode
+    //var background: SKSpriteNode
 
     
     //Attributes
@@ -20,17 +30,16 @@ public class GameScene: SKScene, BaseScene {
     var sceneManager: SceneTransitionDelegate?
     
     //Constructor
-    public init(size: CGSize, battle: Battle, background: SKSpriteNode) {
+    public override init(size: CGSize) {
         attackButton1 = SKSpriteNode(imageNamed: "AttackButton")
         attackButton2 = SKSpriteNode(imageNamed: "AttackButton")
         defendButton = SKSpriteNode(imageNamed: "DefendButton")
-        self.battle = battle
-        self.background = background
-        
+        battle = Battle(player: Character(name: "Player", level: 1), enemy: Character(name: "Enemy1", level: 1))
         super.init(size: size)
+        battle.observer = self
         setUpScene()
     }
-     
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -55,16 +64,11 @@ public class GameScene: SKScene, BaseScene {
         
         battle.enemy.node.position = CGPoint(x: width/1.1, y: height/1.5)
         self.addChild(battle.enemy.node)
+
         
-        battle.player.node.position = CGPoint(x: width/4, y: height/4)
-        self.addChild(player)
-        
-        background.zPosition = -1
-        background.position = CGPoint(x: width/2, y: height/2)
-        self.addChild(background)
-        
-        animate()
-        
+//        background.zPosition = -1
+//        background.position = CGPoint(x: width/2, y: height/2)
+//        self.addChild(background)
     }
     
     func startGame() {

@@ -7,15 +7,21 @@ public enum CharacterAction {
 
 public class Battle {
     
-    private var player: Character
-    private var enemy: Character
-    public var isFighting: Bool
+    var player: Character
+    var enemy: Character
+    var isFighting = true {
+        didSet {
+            observer?.finishBattle()
+        }
+    }
+    
+    public weak var observer: Observer?
     
     
     init(player: Character, enemy: Character) {
         self.player = player
         self.enemy = enemy
-        self.isFighting = true
+        //self.isFighting = true
     }
     
     
@@ -57,6 +63,7 @@ public class Battle {
             var ability = 0
             let random = Int.random(in: 1...3)
             repeat {
+                ability = 0
                 //Randomize the enemy action
                 switch random {
                 case 1:
