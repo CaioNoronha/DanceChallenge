@@ -44,6 +44,7 @@ public class SceneManager : SceneTransitionDelegate {
     }
     
     public func transitionToScene(_ indentifier: SceneIdentifier) {
+//currentScene?.isUserInteractionEnabled = true
         if let scene = scenes[indentifier] {
             self.currentScene = scene
         } else {
@@ -51,6 +52,7 @@ public class SceneManager : SceneTransitionDelegate {
             scenes[indentifier] = scene
             self.currentScene = scene
         }
+        //currentScene?.isUserInteractionEnabled = false
         sceneView.presentScene(currentScene)
     }
     
@@ -70,12 +72,12 @@ public class SceneManager : SceneTransitionDelegate {
             return gameScene
             
         case .pauseScene:
-            let pauseScene = GameScene(size: viewSize)
+            let pauseScene = InitialScene(size: viewSize)
             pauseScene.sceneManager = self
             return pauseScene
             
         case .endScene:
-            let endScene = GameScene(size: viewSize)
+            let endScene = InitialScene(size: viewSize)
             endScene.sceneManager = self
             return endScene
         }
