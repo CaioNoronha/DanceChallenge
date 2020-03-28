@@ -61,14 +61,13 @@ public class Battle {
             enemy.reloadAbilitys()
             
             var ability = 0
-            let random = Int.random(in: 1...3)
+            var random : Int
             repeat {
+                random = Int.random(in: 1...3)
                 ability = 0
                 //Randomize the enemy action
                 switch random {
-                case 1:
-                    ability = enemy.attack(random)
-                case 2:
+                case 1, 2:
                     ability = enemy.attack(random)
                 case 3:
                     ability = enemy.defend()

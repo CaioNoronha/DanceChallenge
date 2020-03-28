@@ -17,7 +17,7 @@ protocol BaseScene {
 
 
 public enum SceneIdentifier {
-    case initialScene, gameScene, pauseScene, endScene
+    case initialScene, battleScene1, battleScene2, battleScene3, pauseScene, endScene
 }
 
 protocol SceneTransitionDelegate {
@@ -66,10 +66,20 @@ public class SceneManager : SceneTransitionDelegate {
             initial.sceneManager = self
             return initial
             
-        case .gameScene:
-            let gameScene = GameScene(size: viewSize)
-            gameScene.sceneManager = self
-            return gameScene
+        case .battleScene1:
+            let battleScene1 = BattleScene(size: viewSize, level: 1)
+            battleScene1.sceneManager = self
+            return battleScene1
+            
+        case .battleScene2:
+            let battleScene2 = BattleScene(size: viewSize, level: 2)
+            battleScene2.sceneManager = self
+            return battleScene2
+            
+        case .battleScene3:
+            let battleScene3 = BattleScene(size: viewSize, level: 3)
+            battleScene3.sceneManager = self
+            return battleScene3
             
         case .pauseScene:
             let pauseScene = InitialScene(size: viewSize)

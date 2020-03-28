@@ -10,7 +10,7 @@ extension GameScene: Observer {
     }
 }
 
-public class GameScene: SKScene, BaseScene {
+public class BattleScene: SKScene, BaseScene {
     
     //Sprites
     var attackButton1: SKSpriteNode
@@ -30,11 +30,11 @@ public class GameScene: SKScene, BaseScene {
     var sceneManager: SceneTransitionDelegate?
     
     //Constructor
-    public override init(size: CGSize) {
+    public override init(size: CGSize, level: Int) {
         attackButton1 = SKSpriteNode(imageNamed: "AttackButton")
         attackButton2 = SKSpriteNode(imageNamed: "AttackButton")
         defendButton = SKSpriteNode(imageNamed: "DefendButton")
-        battle = Battle(player: Character(name: "Player", level: 1), enemy: Character(name: "Enemy1", level: 1))
+        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy1", level: level+ 1))
         super.init(size: size)
         battle.observer = self
         setUpScene()
@@ -97,8 +97,7 @@ extension GameScene {
             battle.playerAct(.defend)
            
         default:
-            //print("Nothing detected!")
-            startGame()
+            print("Nothing detected!")
         }
     }
 }
