@@ -86,7 +86,7 @@ public struct CustomAction {
     init(_ timeToLoad: Int) {
         self.timeToLoad = timeToLoad
         self.load = timeToLoad
-        self.onUsing = true
+        self.onUsing = false
     }
     
     public mutating func use() -> Bool {

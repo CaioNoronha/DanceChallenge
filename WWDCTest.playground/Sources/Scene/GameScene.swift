@@ -4,9 +4,19 @@ public protocol Observer: class {
     func finishBattle()
 }
 
-extension GameScene: Observer {
+extension BattleScene: Observer {
     public func finishBattle() {
-        sceneManager?.transitionToScene(.initialScene)
+        
+        switch level {
+        case 1:
+            sceneManager?.transitionToScene(.battleScene2)
+        case 2:
+            sceneManager?.transitionToScene(.battleScene3)
+        case 3 :
+            sceneManager?.transitionToScene(.initialScene)
+        default:
+            sceneManager?.transitionToScene(.initialScene)
+        }
     }
 }
 
@@ -27,14 +37,17 @@ public class BattleScene: SKScene, BaseScene {
         return self.size.height
     }
     var battle: Battle
+    var level: Int
     var sceneManager: SceneTransitionDelegate?
     
     //Constructor
-    public override init(size: CGSize, level: Int) {
+    public init(size: CGSize, level: Int) {
+        print("--------- BATTLE \(level) --------- \n")
         attackButton1 = SKSpriteNode(imageNamed: "AttackButton")
         attackButton2 = SKSpriteNode(imageNamed: "AttackButton")
         defendButton = SKSpriteNode(imageNamed: "DefendButton")
-        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy1", level: level+ 1))
+        self.level = level
+        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy1", level: level))
         super.init(size: size)
         battle.observer = self
         setUpScene()
@@ -76,7 +89,7 @@ public class BattleScene: SKScene, BaseScene {
     }
 }
 
-extension GameScene {
+extension BattleScene {
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)

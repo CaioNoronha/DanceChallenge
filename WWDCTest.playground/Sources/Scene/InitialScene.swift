@@ -46,7 +46,7 @@ public class InitialScene: SKScene, BaseScene {
     }
     
     func startGame() {
-        sceneManager?.transitionToScene(.gameScene)
+        sceneManager?.transitionToScene(.battleScene1)
     }
 }
 
@@ -55,8 +55,8 @@ extension InitialScene {
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
+        print("Initial Scene")
         startGame()
-        print("estou aqui")
     }
 }
 

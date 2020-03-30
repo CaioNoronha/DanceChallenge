@@ -21,7 +21,6 @@ public class Battle {
     init(player: Character, enemy: Character) {
         self.player = player
         self.enemy = enemy
-        //self.isFighting = true
     }
     
     
@@ -81,14 +80,15 @@ public class Battle {
                 
                 if !player.isAlive {
                     isFighting = false
-                    //Player lose the game
                     print("Enemy wins")
+                    //Player lose the game
                 }
             }
         } else {
             //Player is the winner
-            isFighting = false
             print("Player wins")
+            isFighting = false
+
         }
     }
 }
