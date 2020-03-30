@@ -35,7 +35,7 @@ public class BattleScene: SKScene, BaseScene {
         attackButton1 = SKSpriteNode(imageNamed: "AttackButton")
         attackButton2 = SKSpriteNode(imageNamed: "AttackButton")
         defendButton = SKSpriteNode(imageNamed: "DefendButton")
-        self.level = 0
+        self.level = 1
         print(self.level)
         self.background = SKSpriteNode(imageNamed: "")
         battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy\(level)", level: level))
@@ -94,7 +94,9 @@ public class BattleScene: SKScene, BaseScene {
 extension BattleScene {
     
     public override func didMove(to view: SKView) {
-        levelUpBattle()
+        if level > 1 {
+            levelUpBattle()
+        }
     }
     
     
