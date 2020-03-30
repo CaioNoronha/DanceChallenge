@@ -46,7 +46,7 @@ public class InitialScene: SKScene, BaseScene {
     }
     
     func startGame() {
-        sceneManager?.transitionToScene(.battleScene1)
+        sceneManager?.transitionToScene(.battleScene)
     }
 }
 

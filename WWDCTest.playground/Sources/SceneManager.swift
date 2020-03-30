@@ -2,22 +2,11 @@ import SpriteKit
 
 protocol BaseScene {
     var sceneManager: SceneTransitionDelegate? { get set }
-//    var width : CGFloat { get set }
-//    var height: CGFloat { get set }
 }
-
-//extension BaseScene {
-//    var width: CGFloat {
-//        return self.size.width
-//    }
-//    var height: CGFloat {
-//        return self.size.height
-//    }
-//}
 
 
 public enum SceneIdentifier {
-    case initialScene, battleScene1, battleScene2, battleScene3, pauseScene, endScene
+    case initialScene, battleScene, pauseScene, endScene
 }
 
 protocol SceneTransitionDelegate {
@@ -66,20 +55,11 @@ public class SceneManager : SceneTransitionDelegate {
             initial.sceneManager = self
             return initial
             
-        case .battleScene1:
-            let battleScene1 = BattleScene(size: viewSize, level: 1)
+        case .battleScene:
+            let battleScene1 = BattleScene(size: viewSize)
             battleScene1.sceneManager = self
             return battleScene1
             
-        case .battleScene2:
-            let battleScene2 = BattleScene(size: viewSize, level: 2)
-            battleScene2.sceneManager = self
-            return battleScene2
-            
-        case .battleScene3:
-            let battleScene3 = BattleScene(size: viewSize, level: 3)
-            battleScene3.sceneManager = self
-            return battleScene3
             
         case .pauseScene:
             let pauseScene = InitialScene(size: viewSize)

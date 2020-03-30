@@ -1,8 +1,5 @@
 import SpriteKit
 
-
-
-
 public class Character {
     
     //Attributes
@@ -20,7 +17,7 @@ public class Character {
     }
     
     init(name: String, level: Int) {
-        node = SKSpriteNode(imageNamed: "name")
+        node = SKSpriteNode(imageNamed: "\(name)\(level)")
         node.name = name
         self.level = level
         self.hp = 15 * level

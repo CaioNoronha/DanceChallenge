@@ -6,17 +6,7 @@ public protocol Observer: class {
 
 extension BattleScene: Observer {
     public func finishBattle() {
-        
-        switch level {
-        case 1:
-            sceneManager?.transitionToScene(.battleScene2)
-        case 2:
-            sceneManager?.transitionToScene(.battleScene3)
-        case 3 :
-            sceneManager?.transitionToScene(.initialScene)
-        default:
-            sceneManager?.transitionToScene(.initialScene)
-        }
+        sceneManager?.transitionToScene(.initialScene)
     }
 }
 
@@ -26,7 +16,7 @@ public class BattleScene: SKScene, BaseScene {
     var attackButton1: SKSpriteNode
     var attackButton2: SKSpriteNode
     var defendButton: SKSpriteNode
-    //var background: SKSpriteNode
+    var background: SKSpriteNode
 
     
     //Attributes
@@ -41,15 +31,16 @@ public class BattleScene: SKScene, BaseScene {
     var sceneManager: SceneTransitionDelegate?
     
     //Constructor
-    public init(size: CGSize, level: Int) {
-        print("--------- BATTLE \(level) --------- \n")
+    public override init(size: CGSize) {
         attackButton1 = SKSpriteNode(imageNamed: "AttackButton")
         attackButton2 = SKSpriteNode(imageNamed: "AttackButton")
         defendButton = SKSpriteNode(imageNamed: "DefendButton")
-        self.level = level
-        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy1", level: level))
+        self.level = 0
+        print(self.level)
+        self.background = SKSpriteNode(imageNamed: "")
+        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy\(level)", level: level))
+
         super.init(size: size)
-        battle.observer = self
         setUpScene()
     }
     
@@ -58,7 +49,6 @@ public class BattleScene: SKScene, BaseScene {
     }
     
     //Methods
-    
     func setUpScene() {
         attackButton1.name = "Attack Button 1"
         attackButton1.position = CGPoint(x: width/2.4, y: height/4)
@@ -75,21 +65,39 @@ public class BattleScene: SKScene, BaseScene {
         defendButton.setScale(1.5)
         self.addChild(defendButton)
         
-        battle.enemy.node.position = CGPoint(x: width/1.1, y: height/1.5)
-        self.addChild(battle.enemy.node)
-
+        background.zPosition = -1
+        background.position = CGPoint(x: width/2, y: height/2)
+        self.addChild(background)
         
-//        background.zPosition = -1
-//        background.position = CGPoint(x: width/2, y: height/2)
-//        self.addChild(background)
+        setUpCharacters()
     }
     
-    func startGame() {
-        //sceneManager?.transitionToScene(.initialScene)
+    func levelUpBattle() {
+        self.level += 1
+        self.background.texture = SKTexture(imageNamed: "")
+
+        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy\(level)", level: level))
+        setUpCharacters()
+    }
+    
+    private func setUpCharacters() {
+        battle.observer = self
+        
+        battle.enemy.node.position = CGPoint(x: width/1.1, y: height/1.5)
+        self.addChild(battle.enemy.node)
+        
+        battle.player.node.position = CGPoint(x: width/4, y: height/4)
+        self.addChild(battle.player.node)
     }
 }
 
 extension BattleScene {
+    
+    public override func didMove(to view: SKView) {
+        levelUpBattle()
+    }
+    
+    
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
