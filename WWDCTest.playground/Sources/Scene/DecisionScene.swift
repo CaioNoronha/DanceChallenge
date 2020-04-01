@@ -1,15 +1,15 @@
 import SpriteKit
 
-public class InitialScene: SKScene, BaseScene {
+public class DecisionScene: SKScene, BaseScene {
     
     //Attributes
-    var playLabel: SKLabelNode
+    //var playLabel: SKLabelNode
     var background: SKSpriteNode
     var sceneManager: SceneTransitionDelegate?
     
     //Constructor
     public override init(size: CGSize) {
-        playLabel = SKLabelNode(text: "Press anywhere to start")
+        //playLabel = SKLabelNode(text: "Press anywhere to start")
         background = SKSpriteNode(imageNamed: "Lente Negra")
         super.init(size: size)
         setUpScene()
@@ -23,10 +23,10 @@ public class InitialScene: SKScene, BaseScene {
     
     func setUpScene() {
         //PlayerLabel
-        playLabel.position = CGPoint(x: self.size.width/2, y: self.size.height/3)
-        playLabel.fontName = "Pixel Tactical"
-        playLabel.fontSize = 18
-        self.addChild(playLabel)
+//        playLabel.position = CGPoint(x: self.size.width/2, y: self.size.height/3)
+//        playLabel.fontName = "Pixel Tactical"
+//        playLabel.fontSize = 18
+//        self.addChild(playLabel)
         
         //BackGround
         background.zPosition = -1
@@ -42,7 +42,7 @@ public class InitialScene: SKScene, BaseScene {
             SKAction.fadeAlpha(to: 0.4, duration: 0.8),
             SKAction.fadeAlpha(to: 1, duration: 0.8)]
         
-        playLabel.run(SKAction.repeatForever(SKAction.sequence(actionArray)))
+//        playLabel.run(SKAction.repeatForever(SKAction.sequence(actionArray)))
     }
     
     func startGame() {
@@ -50,12 +50,12 @@ public class InitialScene: SKScene, BaseScene {
     }
 }
 
-extension InitialScene {
+extension DecisionScene {
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
-        print("Initial ---------- Going to BattleScene ----------")
+        print("Decision ---------- Going to BattleScene ----------")
         startGame()
     }
 }

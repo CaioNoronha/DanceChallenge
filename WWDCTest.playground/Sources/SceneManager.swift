@@ -6,7 +6,7 @@ protocol BaseScene {
 
 
 public enum SceneIdentifier {
-    case initialScene, battleScene, pauseScene, endScene
+    case initialScene, battleScene, decisionScene, pauseScene, endScene
 }
 
 protocol SceneTransitionDelegate {
@@ -33,7 +33,8 @@ public class SceneManager : SceneTransitionDelegate {
     }
     
     public func transitionToScene(_ indentifier: SceneIdentifier) {
-//currentScene?.isUserInteractionEnabled = true
+
+        print(indentifier)
         if let scene = scenes[indentifier] {
             self.currentScene = scene
         } else {
@@ -41,7 +42,6 @@ public class SceneManager : SceneTransitionDelegate {
             scenes[indentifier] = scene
             self.currentScene = scene
         }
-        //currentScene?.isUserInteractionEnabled = false
         sceneView.presentScene(currentScene)
     }
     
@@ -59,7 +59,11 @@ public class SceneManager : SceneTransitionDelegate {
             let battleScene1 = BattleScene(size: viewSize)
             battleScene1.sceneManager = self
             return battleScene1
-            
+        
+        case .decisionScene:
+            let decisionScene = DecisionScene(size: viewSize)
+            decisionScene.sceneManager = self
+            return decisionScene
             
         case .pauseScene:
             let pauseScene = InitialScene(size: viewSize)

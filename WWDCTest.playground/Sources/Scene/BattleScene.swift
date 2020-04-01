@@ -6,7 +6,8 @@ public protocol Observer: class {
 
 extension BattleScene: Observer {
     public func finishBattle() {
-        sceneManager?.transitionToScene(.initialScene)
+        levelUpBattle()
+        sceneManager?.transitionToScene(.decisionScene)
     }
 }
 
@@ -32,13 +33,12 @@ public class BattleScene: SKScene, BaseScene {
     
     //Constructor
     public override init(size: CGSize) {
-        attackButton1 = SKSpriteNode(imageNamed: "AttackButton")
-        attackButton2 = SKSpriteNode(imageNamed: "AttackButton")
-        defendButton = SKSpriteNode(imageNamed: "DefendButton")
         self.level = 1
-        print(self.level)
+        attackButton1 = SKSpriteNode(imageNamed: "Button1")
+        attackButton2 = SKSpriteNode(imageNamed: "Button1")
+        defendButton = SKSpriteNode(imageNamed: "Button2")
         self.background = SKSpriteNode(imageNamed: "")
-        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy\(level)", level: level))
+        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy", level: level))
 
         super.init(size: size)
         setUpScene()
@@ -76,7 +76,7 @@ public class BattleScene: SKScene, BaseScene {
         self.level += 1
         self.background.texture = SKTexture(imageNamed: "")
 
-        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy\(level)", level: level))
+        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy", level: level))
         setUpCharacters()
     }
     
@@ -93,16 +93,9 @@ public class BattleScene: SKScene, BaseScene {
 
 extension BattleScene {
     
-    public override func didMove(to view: SKView) {
-        if level > 1 {
-            levelUpBattle()
-        }
-    }
-    
-    
-    
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+        
         
         //Take the first touch
         let touch = touches.first

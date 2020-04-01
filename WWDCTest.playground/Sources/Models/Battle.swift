@@ -76,8 +76,8 @@ public class Battle {
                 player.hit(damage: ability)
                 
                 if !player.isAlive {
-                    isFighting = false
                     print("Enemy wins")
+                    isFighting = false
                     //Player lose the game
                 }
             }
