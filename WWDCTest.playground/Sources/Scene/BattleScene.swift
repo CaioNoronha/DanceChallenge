@@ -6,8 +6,17 @@ public protocol Observer: class {
 
 extension BattleScene: Observer {
     public func finishBattle() {
-        levelUpBattle()
-        sceneManager?.transitionToScene(.decisionScene)
+        
+        switch level {
+        case 1:
+            sceneManager?.transitionToScene(.decisionScene1)
+        case 2:
+            sceneManager?.transitionToScene(.decisionScene2)
+        case 3:
+            sceneManager?.transitionToScene(.decisionScene3)
+        default:
+            sceneManager?.transitionToScene(.initialScene)
+        }
     }
 }
 
@@ -27,18 +36,18 @@ public class BattleScene: SKScene, BaseScene {
     var height: CGFloat {
         return self.size.height
     }
-    var battle: Battle
     var level: Int
+    var battle: Battle
     var sceneManager: SceneTransitionDelegate?
     
     //Constructor
-    public override init(size: CGSize) {
-        self.level = 1
+    public init(size: CGSize, level: Int) {
         attackButton1 = SKSpriteNode(imageNamed: "Button1")
         attackButton2 = SKSpriteNode(imageNamed: "Button1")
         defendButton = SKSpriteNode(imageNamed: "Button2")
         self.background = SKSpriteNode(imageNamed: "")
         battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy", level: level))
+        self.level = level
 
         super.init(size: size)
         setUpScene()
@@ -69,18 +78,6 @@ public class BattleScene: SKScene, BaseScene {
         background.position = CGPoint(x: width/2, y: height/2)
         self.addChild(background)
         
-        setUpCharacters()
-    }
-    
-    func levelUpBattle() {
-        self.level += 1
-        self.background.texture = SKTexture(imageNamed: "")
-
-        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy", level: level))
-        setUpCharacters()
-    }
-    
-    private func setUpCharacters() {
         battle.observer = self
         
         battle.enemy.node.position = CGPoint(x: width/1.1, y: height/1.5)

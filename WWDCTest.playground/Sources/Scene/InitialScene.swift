@@ -10,7 +10,7 @@ public class InitialScene: SKScene, BaseScene {
     //Constructor
     public override init(size: CGSize) {
         playLabel = SKLabelNode(text: "Press anywhere to start")
-        background = SKSpriteNode(imageNamed: "Lente Negra")
+        background = SKSpriteNode(imageNamed: "Background")
         super.init(size: size)
         setUpScene()
     }
@@ -46,7 +46,7 @@ public class InitialScene: SKScene, BaseScene {
     }
     
     func startGame() {
-        sceneManager?.transitionToScene(.battleScene)
+        sceneManager?.transitionToScene(.battleScene1)
     }
 }
 
