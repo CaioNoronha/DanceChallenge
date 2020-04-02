@@ -5,7 +5,7 @@ public class InitialScene: SKScene, BaseScene {
     //Attributes
     var playLabel: SKLabelNode
     var background: SKSpriteNode
-    var sceneManager: SceneTransitionDelegate?
+    weak var sceneManager: SceneTransitionDelegate?
     
     //Constructor
     public override init(size: CGSize) {

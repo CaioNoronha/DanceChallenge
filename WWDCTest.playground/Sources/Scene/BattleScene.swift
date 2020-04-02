@@ -38,7 +38,7 @@ public class BattleScene: SKScene, BaseScene {
     }
     var level: Int
     var battle: Battle
-    var sceneManager: SceneTransitionDelegate?
+    weak var sceneManager: SceneTransitionDelegate?
     
     //Constructor
     public init(size: CGSize, level: Int) {

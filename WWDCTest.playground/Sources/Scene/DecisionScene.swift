@@ -12,7 +12,7 @@ public class DecisionScene: SKScene, BaseScene {
     
     //Attributes
     var level: Int
-    var sceneManager: SceneTransitionDelegate?
+    weak var sceneManager: SceneTransitionDelegate?
     
     //Constructor
     public init(size: CGSize, level: Int) {
