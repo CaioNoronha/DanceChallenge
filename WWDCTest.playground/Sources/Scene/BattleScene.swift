@@ -23,9 +23,9 @@ extension BattleScene: Observer {
 public class BattleScene: SKScene, BaseScene {
     
     //Sprites
-    var attackButton1: SKSpriteNode
-    var attackButton2: SKSpriteNode
-    var defendButton: SKSpriteNode
+    var simpleAttackButton: SKSpriteNode
+    var shieldButton: SKSpriteNode
+    var especialAttackButton: SKSpriteNode
     var background: SKSpriteNode
 
     
@@ -42,11 +42,11 @@ public class BattleScene: SKScene, BaseScene {
     
     //Constructor
     public init(size: CGSize, level: Int) {
-        attackButton1 = SKSpriteNode(imageNamed: "Button1")
-        attackButton2 = SKSpriteNode(imageNamed: "Button1")
-        defendButton = SKSpriteNode(imageNamed: "Button2")
-        self.background = SKSpriteNode(imageNamed: "")
-        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "Enemy", level: level))
+        simpleAttackButton = SKSpriteNode(imageNamed: "Battle/Button/Battle_Button_S.Attack")
+        shieldButton = SKSpriteNode(imageNamed: "Battle/Button/Battle_Button_Defend")
+        especialAttackButton = SKSpriteNode(imageNamed: "Battle/Button/Battle_Button_E.Attack")
+        self.background = SKSpriteNode(imageNamed: "Battle/Background/Battle_Background_\(level)")
+        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "John", level: level))
         self.level = level
 
         super.init(size: size)
@@ -59,32 +59,40 @@ public class BattleScene: SKScene, BaseScene {
     
     //Methods
     func setUpScene() {
-        attackButton1.name = "Attack Button 1"
-        attackButton1.position = CGPoint(x: width/2.4, y: height/4)
-        attackButton1.setScale(1.5)
-        self.addChild(attackButton1)
+        simpleAttackButton.name = "Simples Button"
+        simpleAttackButton.position = CGPoint(x: width/2.4, y: height/4)
+        simpleAttackButton.setScale(1.5)
+        self.addChild(simpleAttackButton)
         
-        attackButton2.name = "Attack Button 2"
-        attackButton2.position = CGPoint(x: width/1.71, y: height/4)
-        attackButton2.setScale(1.5)
-        self.addChild(attackButton2)
+        shieldButton.name = "Shield Button"
+        shieldButton.position = CGPoint(x: width/1.71, y: height/4)
+        shieldButton.setScale(1.5)
+        self.addChild(shieldButton)
         
-        defendButton.name = "Defend Button"
-        defendButton.position = CGPoint(x: width/2, y: height/6.5)
-        defendButton.setScale(1.5)
-        self.addChild(defendButton)
+        especialAttackButton.name = "Especial Button"
+        especialAttackButton.position = CGPoint(x: width/2, y: height/6.5)
+        especialAttackButton.setScale(1.5)
+        self.addChild(especialAttackButton)
         
+        //Background
         background.zPosition = -1
         background.position = CGPoint(x: width/2, y: height/2)
         self.addChild(background)
         
         battle.observer = self
         
-        battle.enemy.node.position = CGPoint(x: width/1.1, y: height/1.5)
+        //Enemy
+        battle.enemy.node.position = CGPoint(x: width/1.48, y: height/2)
         self.addChild(battle.enemy.node)
+                
+        battle.enemy.hpNode.position = CGPoint(x: width/1.48, y: height/1.6)
+        self.addChild(battle.enemy.hpNode)
+
+        battle.enemy.characterLabel.position = CGPoint(x: width/1.48, y: height/1.4)
+        self.addChild(battle.enemy.characterLabel)
         
         battle.player.node.position = CGPoint(x: width/4, y: height/4)
-        self.addChild(battle.player.node)
+        //self.addChild(battle.player.node)
     }
 }
 
@@ -102,11 +110,11 @@ extension BattleScene {
         let touchedNode = self.atPoint(positionInScene!)
         
         switch touchedNode.name {
-        case "Attack Button 1":
+        case "Simples Button":
             battle.playerAct(.attack1)
-        case "Attack Button 2":
+        case "Shield Button":
             battle.playerAct(.attack2)
-        case "Defend Button":
+        case "Especial Button":
             battle.playerAct(.defend)
            
         default:

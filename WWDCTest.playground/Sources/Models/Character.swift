@@ -2,13 +2,26 @@ import SpriteKit
 
 public class Character {
     
+    //Nodes
+    var node = SKSpriteNode()
+    var hpNode = SKSpriteNode(imageNamed: "Battle/HP")
+    var simpleAttackAnimate = [SKSpriteNode]()
+    var especialAttackAnimate = [SKSpriteNode]()
+    var shieldAnimate = [SKSpriteNode]()
+    var characterLabel = SKLabelNode()
+    
     //Attributes
-    var node: SKSpriteNode
-    var isAlive: Bool
+    private var name: String
     private var hp: Int
     private var level: Int
-    private var especialAttack: CustomAction
-    private var shield: CustomAction
+    private var especialAttack = CustomAction(2)
+    private var shield = CustomAction(3)
+    var isAlive = true
+    
+    private var hpWidth: CGFloat {
+        return hpNode.size.width * CGFloat(hp/level * 15)
+    }
+
     private var simpleDamage: Int {
         return level * 2
     }
@@ -17,36 +30,59 @@ public class Character {
     }
     
     init(name: String, level: Int) {
-        node = SKSpriteNode(imageNamed: "\(name)\(level)")
-        node.name = name
+        self.name = name
         self.level = level
         self.hp = 15 * level
-        self.especialAttack = CustomAction(3)
-        self.shield = CustomAction(2)
-        self.isAlive = true
+        
+        setUpNodes()
+    }
+    
+    private func setUpNodes() {
+                
+        if name == "Caio" {
+            node = SKSpriteNode(imageNamed: "Battle/Enemy/Player")
+            for i in 0...4 {
+                simpleAttackAnimate.append(SKSpriteNode(imageNamed: "Battle/Player/\(level)/S.Attack/Battle_\(name)_\(level)_S.Attack_\(i)"))
+                
+                especialAttackAnimate.append(SKSpriteNode(imageNamed: "Battle/Player/\(level)/E.Attack/Battle_\(name)_\(level)_E.Attack_\(i)"))
+                
+                shieldAnimate.append(SKSpriteNode(imageNamed: "Battle/Player/\(level)/Heal/Battle_\(name)_\(level)_Heal_\(i)"))
+                
+            }
+        } else {
+            node = SKSpriteNode(imageNamed: "Battle/Enemy/\(level)/Enemy_\(level)")
+            for i in 0...4 {
+                simpleAttackAnimate.append(SKSpriteNode(imageNamed: "Battle/Enemy/\(level)/S.Attack/Battle_\(name)_\(level)_S.Attack_\(i)"))
+                
+                especialAttackAnimate.append(SKSpriteNode(imageNamed: "Battle/Enemy/\(level)/E.Attack/Battle_\(name)_\(level)_E.Attack_\(i)"))
+                
+                shieldAnimate.append(SKSpriteNode(imageNamed: "Battle/Enemy/\(level)/Heal/Battle_\(name)_\(level)_Heal_\(i)"))
+                
+            }
+        }
     }
     
     
     public func attack(_ type: Int) -> Int {
         if type == 1 {
-            print("\(node.name) used Simple Attack!")
+            characterLabel.text = "\(name) used Simple Attack!"
             return simpleDamage
         }
         
         if especialAttack.use() {
-            print("\(node.name) used Especial Attack!")
+            characterLabel.text = "\(name) used Especial Attack!"
             return especialDamage
         }
-        print("\(node.name) is Reloading!")
+        characterLabel.text = "\(name) is reloading!"
         return 0
     }
     
     public func defend() -> Int {
         if shield.use() {
-            print("\(node.name) used Shield!")
+            characterLabel.text = "\(name) used Shield!"
             return 1
         }
-        print("\(node.name) is Reloading!")
+        characterLabel.text = "\(name) is reloading!"
         return 0
     }
     
@@ -59,6 +95,7 @@ public class Character {
         if hp <= 0 {
             isAlive = false
         }
+        hpNode.size.width = hpWidth
     }
     
     public func reloadAbilitys() {
