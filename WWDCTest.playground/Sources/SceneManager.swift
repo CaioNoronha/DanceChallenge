@@ -29,6 +29,9 @@ public class SceneManager : SceneTransitionDelegate {
     private func addFonts() {
         let fontURL = Bundle.main.url(forResource: "Pixel Tactical", withExtension: "otf")
         CTFontManagerRegisterFontsForURL(fontURL! as CFURL, CTFontManagerScope.process, nil)
+        
+        let fontURL2 = Bundle.main.url(forResource: "Nunito-Regular", withExtension: "ttf")
+        CTFontManagerRegisterFontsForURL(fontURL2! as CFURL, CTFontManagerScope.process, nil)
     }
     
     public func transitionToScene(_ indentifier: SceneIdentifier) {

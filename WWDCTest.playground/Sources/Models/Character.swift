@@ -18,8 +18,12 @@ public class Character {
     private var shield = CustomAction(3)
     var isAlive = true
     
+    
+    private var hpWidthMax: CGFloat
+    
     private var hpWidth: CGFloat {
-        return hpNode.size.width * CGFloat(hp/level * 15)
+        let hpPorcent = CGFloat(hp/(15 * level))
+        return hpPorcent * hpWidthMax
     }
 
     private var simpleDamage: Int {
@@ -33,12 +37,13 @@ public class Character {
         self.name = name
         self.level = level
         self.hp = 15 * level
+        self.hpWidthMax = hpNode.size.width
         
         setUpNodes()
     }
     
     private func setUpNodes() {
-                
+                    
         if name == "Caio" {
             node = SKSpriteNode(imageNamed: "Battle/Enemy/Player")
             for i in 0...4 {
@@ -95,6 +100,7 @@ public class Character {
         if hp <= 0 {
             isAlive = false
         }
+        
         hpNode.size.width = hpWidth
     }
     

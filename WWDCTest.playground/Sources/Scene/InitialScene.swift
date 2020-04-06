@@ -44,7 +44,7 @@ public class InitialScene: SKScene, BaseScene {
         
         //PlayerLabel
         playLabel.position = CGPoint(x: self.size.width/1.3, y: self.size.height/9)
-        playLabel.fontName = "Nunito-Regular"
+        playLabel.fontName = "Nunito Regular"
         playLabel.fontSize = 20
         self.addChild(playLabel)
         

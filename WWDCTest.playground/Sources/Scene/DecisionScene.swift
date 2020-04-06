@@ -1,4 +1,5 @@
 import SpriteKit
+import UIKit
 
 public class DecisionScene: SKScene, BaseScene {
     
@@ -6,8 +7,9 @@ public class DecisionScene: SKScene, BaseScene {
     private var leftButton: SKSpriteNode
     private var rightButton: SKSpriteNode
     private var background: SKSpriteNode
-    private var enemyNode: SKSpriteNode
-    private var enemyMessage = SKLabelNode()
+    private var enemy: SKSpriteNode
+    private var message = SKLabelNode()
+    private var ballon: SKSpriteNode
 
     
     //Attributes
@@ -18,10 +20,11 @@ public class DecisionScene: SKScene, BaseScene {
     public init(size: CGSize, level: Int) {
         self.level = level
         
-        enemyNode = SKSpriteNode(imageNamed: "enemy\(level)")
-        leftButton = SKSpriteNode(imageNamed: "Button1")
-        rightButton = SKSpriteNode(imageNamed: "Button1")
-        background = SKSpriteNode(imageNamed: "Background")
+        enemy = SKSpriteNode(imageNamed: "Battle/Enemy/\(level)/Enemy_\(level)")
+        leftButton = SKSpriteNode(imageNamed: "Decision/\(level)/Decision_\(level)_LeftButton")
+        rightButton = SKSpriteNode(imageNamed: "Decision/\(level)/Decision_\(level)_RightButton")
+        background = SKSpriteNode(imageNamed: "Decision/\(level)/Decision_\(level)_Background")
+        ballon = SKSpriteNode(imageNamed: "Decision/Decision_Ballon")
         super.init(size: size)
         setUpScene()
     }
@@ -36,29 +39,37 @@ public class DecisionScene: SKScene, BaseScene {
         
         //LeftButton
         leftButton.name = "Left Button"
-        leftButton.position = CGPoint(x: self.size.width/4, y: self.size.height/2)
-        leftButton.setScale(1.5)
+        leftButton.position = CGPoint(x: self.size.width/4, y: self.size.height/4)
         self.addChild(leftButton)
         
         //RightButton
         rightButton.name = "Right Button"
-        rightButton.position = CGPoint(x: self.size.width/1.5, y: self.size.height/2)
-        rightButton.setScale(1.5)
+        rightButton.position = CGPoint(x: self.size.width/1.5, y: self.size.height/4)
         self.addChild(rightButton)
         
+        //Enemy
+        enemy.position = CGPoint(x: self.size.width/2.2, y: self.size.height/2.5)
+        self.addChild(enemy)
+        
         //BackGround
-        background.zPosition = -1
-        rightButton.setScale(1.5)
+        background.zPosition = -2
         background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         self.addChild(background)
         
-        //EnemyMessage
-        enemyMessage.text = setEnemyMessage()
-        enemyMessage.fontSize = 12
-        enemyMessage.fontName = "Pixel Tactical"
-        enemyMessage.position = CGPoint(x: self.size.width/2, y: self.size.height/1.2)
-        enemyMessage.numberOfLines = 2
-        self.addChild(enemyMessage)
+        //Ballon
+        ballon.position = CGPoint(x: self.size.width/2, y: self.size.height/1.2)
+        ballon.zPosition = -1
+        self.addChild(ballon)
+        
+        
+        //Message
+        message.text = setEnemyMessage()
+        message.fontSize = 16
+        message.fontName = "Nunito Regular"
+        message.fontColor = UIColor.black
+        message.position = CGPoint(x: self.size.width/2, y: self.size.height/1.2)
+        message.numberOfLines = 2
+        self.addChild(message)
         
         
             

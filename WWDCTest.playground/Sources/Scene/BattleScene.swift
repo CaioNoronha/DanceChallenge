@@ -59,18 +59,18 @@ public class BattleScene: SKScene, BaseScene {
     
     //Methods
     func setUpScene() {
-        simpleAttackButton.name = "Simples Button"
-        simpleAttackButton.position = CGPoint(x: width/2.4, y: height/4)
+        simpleAttackButton.name = "Simple Button"
+        simpleAttackButton.position = CGPoint(x: width/1.84, y: height/4)
         simpleAttackButton.setScale(1.5)
         self.addChild(simpleAttackButton)
         
         shieldButton.name = "Shield Button"
-        shieldButton.position = CGPoint(x: width/1.71, y: height/4)
+        shieldButton.position = CGPoint(x: width/1.28, y: height/4)
         shieldButton.setScale(1.5)
         self.addChild(shieldButton)
         
         especialAttackButton.name = "Especial Button"
-        especialAttackButton.position = CGPoint(x: width/2, y: height/6.5)
+        especialAttackButton.position = CGPoint(x: width/1.5, y: height/6.5)
         especialAttackButton.setScale(1.5)
         self.addChild(especialAttackButton)
         
@@ -110,12 +110,12 @@ extension BattleScene {
         let touchedNode = self.atPoint(positionInScene!)
         
         switch touchedNode.name {
-        case "Simples Button":
+        case "Simple Button":
             battle.playerAct(.attack1)
         case "Shield Button":
-            battle.playerAct(.attack2)
-        case "Especial Button":
             battle.playerAct(.defend)
+        case "Especial Button":
+            battle.playerAct(.attack2)
            
         default:
             print("Nothing detected!")
