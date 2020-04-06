@@ -21,8 +21,8 @@ public class DecisionScene: SKScene, BaseScene {
         self.level = level
         
         enemy = SKSpriteNode(imageNamed: "Battle/Enemy/\(level)/Enemy_\(level)")
-        leftButton = SKSpriteNode(imageNamed: "Decision/\(level)/Decision_\(level)_LeftButton")
-        rightButton = SKSpriteNode(imageNamed: "Decision/\(level)/Decision_\(level)_RightButton")
+        leftButton = SKSpriteNode(imageNamed: "Decision/Decision_LeftButton")
+        rightButton = SKSpriteNode(imageNamed: "Decision/Decision_RightButton")
         background = SKSpriteNode(imageNamed: "Decision/\(level)/Decision_\(level)_Background")
         ballon = SKSpriteNode(imageNamed: "Decision/Decision_Ballon")
         super.init(size: size)
@@ -57,7 +57,7 @@ public class DecisionScene: SKScene, BaseScene {
         self.addChild(background)
         
         //Ballon
-        ballon.position = CGPoint(x: self.size.width/2, y: self.size.height/1.2)
+        ballon.position = CGPoint(x: self.size.width/2, y: self.size.height/1.3)
         ballon.zPosition = -1
         self.addChild(ballon)
         
@@ -67,7 +67,7 @@ public class DecisionScene: SKScene, BaseScene {
         message.fontSize = 16
         message.fontName = "Nunito Regular"
         message.fontColor = UIColor.black
-        message.position = CGPoint(x: self.size.width/2, y: self.size.height/1.2)
+        message.position = CGPoint(x: self.size.width/2, y: self.size.height/1.3)
         message.numberOfLines = 2
         self.addChild(message)
         
@@ -80,9 +80,9 @@ public class DecisionScene: SKScene, BaseScene {
         case 1:
             return "You are nothing, you will never get in there! \n if i would you, i would go on left way to try be like me!"
         case 2:
-            return "You are stronger, but you are no better than me! \n If I were you, I would practice every day \n to try to be a little like myself and be able to see \n myself as the best dancer! Turn right to practice and see me win!"
+            return "You are stronger, but you are no better than me! \n If I were you, I would practice every day to try to\n be a little like me! Turn right to practice and see me win!"
         case 3:
-            return "You're amazing! It can be much better, \n keep practicing and you will be \n the best dancer, I believe in you! If you need help, \n give me a call! Turn left to go to the castle!"
+            return "You're amazing! keep practicing and you will be \n the best dancer, I believe in you! If you need help, \n give me a call! Turn left to go to the castle!"
         default:
             return "You are nothing, you will never get in there! \n if i would you, i would go on left way to try be like me!"
         }
@@ -116,13 +116,19 @@ extension DecisionScene {
         // The knot is in that position now
         let touchedNode = self.atPoint(positionInScene!)
         
-//        switch touchedNode.name {
-//        case "Left Button":
-//        case "Right Button":
-//        default:
-//        }
+        switch touchedNode.name {
+        case "Left Button":
+            print(" Left")
+            changeScene()
+
+        case "Right Button":
+            print(" Right")
+            changeScene()
+
+        default:
+            print("Nothing detected!")
+        }
         
-        changeScene()
     }
 }
 
