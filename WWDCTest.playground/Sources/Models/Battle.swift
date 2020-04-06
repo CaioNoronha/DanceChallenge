@@ -38,17 +38,6 @@ public class Battle {
             //Mudar asset
             turnPassed()
             
-        case .attack2:
-            let damage = player.attack(2)
-            
-            if damage != 0 {
-                enemy.hit(damage: damage)
-                //Mudar asset
-                turnPassed()
-            } else {
-                print("Reloading")
-            }
-            
         case .defend:
             if player.defend() != 0 {
                 //Mudar asset
@@ -56,7 +45,19 @@ public class Battle {
             } else {
                 print("Reloading")
             }
-        }        
+            
+        case .attack2:
+        let damage = player.attack(2)
+        
+        if damage != 0 {
+            enemy.hit(damage: damage)
+            //Mudar asset
+            turnPassed()
+        } else {
+            print("Reloading")
+        }
+            
+        }     
     }
     
     private func turnPassed() {
