@@ -46,7 +46,7 @@ public class BattleScene: SKScene, BaseScene {
         shieldButton = SKSpriteNode(imageNamed: "Battle/Button/Battle_Button_Defend")
         especialAttackButton = SKSpriteNode(imageNamed: "Battle/Button/Battle_Button_E.Attack")
         self.background = SKSpriteNode(imageNamed: "Battle/Background/Battle_Background_\(level)")
-        battle = Battle(player: Character(name: "Player", level: level), enemy: Character(name: "John", level: level))
+        battle = Battle(level: level)
         self.level = level
 
         super.init(size: size)

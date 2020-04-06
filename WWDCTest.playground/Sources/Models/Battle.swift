@@ -15,9 +15,19 @@ public class Battle {
     public weak var observer: Observer?
     
     
-    init(player: Character, enemy: Character) {
-        self.player = player
-        self.enemy = enemy
+    init(level: Int) {
+        self.player = Character(name: "Player", level: level)
+        
+        switch level {
+        case 1:
+            self.enemy = Character(name: "Josh", level: level)
+        case 2:
+            self.enemy = Character(name: "Bob", level: level)
+        case 3:
+            self.enemy = Character(name: "Fernando", level: level)
+        default:
+            self.enemy = Character(name: "Josh", level: level)
+        }
     }
     
     
