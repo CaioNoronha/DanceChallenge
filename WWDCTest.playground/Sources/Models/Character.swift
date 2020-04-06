@@ -25,9 +25,17 @@ public class Character {
     
     private var hpWidthMax: CGFloat
     
+    /*
+     hpWidthMax ------ 15 * level
+     hpWidth    ------ hp
+     
+     hpWidth = (hpWidthMax * hp)/(15 * level)
+     */
+    
     private var hpWidth: CGFloat {
-        let hpPorcent = CGFloat(hp/(15 * level))
-        return hpPorcent * hpWidthMax
+        let currentHp = CGFloat(hp)
+        let maxHp = CGFloat(15 * level)
+        return hpWidthMax * currentHp/maxHp
     }
 
     private var simpleDamage: Int {

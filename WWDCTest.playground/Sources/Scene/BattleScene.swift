@@ -61,17 +61,17 @@ public class BattleScene: SKScene, BaseScene {
     func setUpScene() {
         simpleAttackButton.name = "Simple Button"
         simpleAttackButton.position = CGPoint(x: width/1.84, y: height/4)
-        simpleAttackButton.setScale(1.5)
+        //simpleAttackButton.setScale(1.5)
         self.addChild(simpleAttackButton)
         
         shieldButton.name = "Shield Button"
         shieldButton.position = CGPoint(x: width/1.28, y: height/4)
-        shieldButton.setScale(1.5)
+        //shieldButton.setScale(1.5)
         self.addChild(shieldButton)
         
         especialAttackButton.name = "Especial Button"
         especialAttackButton.position = CGPoint(x: width/1.5, y: height/6.5)
-        especialAttackButton.setScale(1.5)
+        //especialAttackButton.setScale(1.5)
         self.addChild(especialAttackButton)
         
         //Background
