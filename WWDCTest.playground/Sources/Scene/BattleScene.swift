@@ -28,7 +28,7 @@ public class BattleScene: SKScene, BaseScene {
         self.background = SKSpriteNode(imageNamed: "Battle/Background/Battle_Background_\(level)")
         battle = Battle(level: level)
         self.level = level
-
+        
         super.init(size: size)
         setUpScene()
     }
@@ -78,6 +78,8 @@ public class BattleScene: SKScene, BaseScene {
         
         battle.player.characterLabel.position = CGPoint(x: width/3.5, y: height/1.8)
         self.addChild(battle.player.characterLabel)
+        
+        Music.shared.playMusic()
     }
 }
 

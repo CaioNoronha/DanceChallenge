@@ -55,6 +55,8 @@ public class CutScene: SKScene, BaseScene {
         self.addChild(labelStart)
         
         labelStart.run(SKAction.repeatForever(SKAction.sequence(animation)))
+        
+        Music.shared.stopMusic()
     }
     
     

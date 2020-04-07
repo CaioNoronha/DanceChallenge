@@ -70,8 +70,8 @@ public class DecisionScene: SKScene, BaseScene {
         message.numberOfLines = 2
         self.addChild(message)
         
-        
-            
+//        let music = SKAction.playSoundFileNamed("Music.mp3", waitForCompletion: false)
+//        self.run(music)
     }
     
     private func setEnemyMessage() -> String {
