@@ -45,6 +45,7 @@ public class CutScene: SKScene, BaseScene {
         
         //Background
         background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        background.zPosition = -1
         self.addChild(background)
         
         //LabelStart
@@ -58,7 +59,8 @@ public class CutScene: SKScene, BaseScene {
     
     
     private func changeScene() {
-        guard indexScene >= 3 else {
+        
+        guard indexScene > 3 else {
             background.texture = scenes[indexScene]
             indexScene += 1
             return
