@@ -1,4 +1,5 @@
 import SpriteKit
+import AVFoundation
 
 public class SceneManager : SceneTransitionDelegate {
     
@@ -9,16 +10,13 @@ public class SceneManager : SceneTransitionDelegate {
     //Constructor
     public init(view: SKView) {
         sceneView = view
-        addFonts()
+        setUps()
     }
     
     //Methods
-    private func addFonts() {
-        let fontURL = Bundle.main.url(forResource: "Pixel Tactical", withExtension: "otf")
+    private func setUps() {
+        let fontURL = Bundle.main.url(forResource: "Nunito-Regular", withExtension: "ttf")
         CTFontManagerRegisterFontsForURL(fontURL! as CFURL, CTFontManagerScope.process, nil)
-        
-        let fontURL2 = Bundle.main.url(forResource: "Nunito-Regular", withExtension: "ttf")
-        CTFontManagerRegisterFontsForURL(fontURL2! as CFURL, CTFontManagerScope.process, nil)
     }
     
     public func transitionToScene(_ indentifier: SceneIdentifier) {
