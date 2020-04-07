@@ -6,7 +6,7 @@ protocol BaseScene {
 
 
 public enum SceneIdentifier {
-    case initialScene, battleScene1, battleScene2, battleScene3, decisionScene1, decisionScene2, decisionScene3, pauseScene, endScene
+    case initialScene, battleScene1, battleScene2, battleScene3, decisionScene1, decisionScene2, decisionScene3, endScene
 }
 
 protocol SceneTransitionDelegate: class {
@@ -35,7 +35,8 @@ public class SceneManager : SceneTransitionDelegate {
     }
     
     public func transitionToScene(_ indentifier: SceneIdentifier) {
-//                  Flyweight
+//        Flyweight
+//
 //        var currentScene: SKScene?
 //
 //        print(indentifier)
@@ -58,7 +59,7 @@ public class SceneManager : SceneTransitionDelegate {
         switch indentifier {
             
         case .initialScene:
-            let initial = InitialScene(size: viewSize)
+            let initial = CutScene(size: viewSize, level: 1)
             initial.sceneManager = self
             return initial
             
@@ -92,13 +93,8 @@ public class SceneManager : SceneTransitionDelegate {
             decisionScene.sceneManager = self
             return decisionScene
             
-        case .pauseScene:
-            let pauseScene = InitialScene(size: viewSize)
-            pauseScene.sceneManager = self
-            return pauseScene
-            
         case .endScene:
-            let endScene = InitialScene(size: viewSize)
+            let endScene = CutScene(size: viewSize, level: 2)
             endScene.sceneManager = self
             return endScene
         }

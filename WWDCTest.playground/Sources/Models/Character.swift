@@ -15,29 +15,18 @@ public class Character {
     var characterLabel = SKLabelNode()
     
     //Attributes
+    var isAlive = true
     private var name: String
     private var hp: Int
     private var level: Int
     private var especialAttack = CustomAction(2)
     private var shield = CustomAction(3)
-    var isAlive = true
-    
-    
     private var hpWidthMax: CGFloat
-    
-    /*
-     hpWidthMax ------ 15 * level
-     hpWidth    ------ hp
-     
-     hpWidth = (hpWidthMax * hp)/(15 * level)
-     */
-    
     private var hpWidth: CGFloat {
         let currentHp = CGFloat(hp)
         let maxHp = CGFloat(15 * level)
         return hpWidthMax * currentHp/maxHp
     }
-
     private var simpleDamage: Int {
         return level * 2
     }
@@ -45,6 +34,7 @@ public class Character {
         return level * 5
     }
     
+    //Constructor
     init(name: String, level: Int) {
         self.name = name
         self.level = level
@@ -54,6 +44,8 @@ public class Character {
         setUpNodes()
     }
     
+    
+    //Methods
     private func setUpNodes() {
         
         if name == "Caio" {
@@ -143,39 +135,4 @@ public class Character {
         level += 1
         hp = 15 * level
     }
-    
-    
 }
-
-public struct CustomAction {
-    
-    private var timeToLoad: Int
-    private var load: Int
-    var onUsing: Bool
-    
-    init(_ timeToLoad: Int) {
-        self.timeToLoad = timeToLoad
-        self.load = timeToLoad
-        self.onUsing = false
-    }
-    
-    public mutating func use() -> Bool {
-        if !onUsing {
-            load = 0
-            onUsing = true
-            return true
-        }
-        return false
-    }
-    
-    public mutating func reload() {
-        if load != timeToLoad {
-            load += 1
-            return
-        }
-        onUsing = false
-    }
-}
-
-
-

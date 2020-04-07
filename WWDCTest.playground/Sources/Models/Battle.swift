@@ -1,7 +1,3 @@
-public enum CharacterAction {
-    case attack1, attack2, defend
-}
-
 public class Battle {
     
     var player: Character
@@ -10,6 +6,10 @@ public class Battle {
         didSet {
             observer?.finishBattle()
         }
+    }
+    
+    public enum CharacterAction {
+        case attack1, attack2, defend
     }
     
     public weak var observer: Observer?
