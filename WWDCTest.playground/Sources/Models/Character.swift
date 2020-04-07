@@ -40,6 +40,7 @@ public class Character {
         self.level = level
         self.hp = 15 * level
         self.hpWidthMax = hpNode.size.width
+        self.hpNode.anchorPoint = .zero
         
         setUpNodes()
     }

@@ -59,23 +59,24 @@ public class BattleScene: SKScene, BaseScene {
         battle.observer = self
         
         //Enemy
-        battle.enemy.node.position = CGPoint(x: width/1.48, y: height/2)
+        battle.enemy.node.position = CGPoint(x: width/1.48, y: height/1.8)
         self.addChild(battle.enemy.node)
                 
-        battle.enemy.hpNode.position = CGPoint(x: width/1.48, y: height/1.6)
+        battle.enemy.hpNode.position = CGPoint(x: width/1.62, y: height/2.8)
         self.addChild(battle.enemy.hpNode)
 
         battle.enemy.characterLabel.position = CGPoint(x: width/1.48, y: height/1.4)
         self.addChild(battle.enemy.characterLabel)
         
         //Player
-        battle.player.node.position = CGPoint(x: width/4, y: height/4)
+        battle.player.node.position = CGPoint(x: width/3.5, y: height/2.5)
         self.addChild(battle.player.node)
         
-        battle.player.hpNode.position = CGPoint(x: width/4, y: height/3.6)
+        battle.player.hpNode.position = CGPoint(x: width/4.5, y: height/30)
+        battle.player.hpNode.setScale(1.5)
         self.addChild(battle.player.hpNode)
         
-        battle.player.characterLabel.position = CGPoint(x: width/4, y: height/3.4)
+        battle.player.characterLabel.position = CGPoint(x: width/3.5, y: height/1.8)
         self.addChild(battle.player.characterLabel)
     }
 }
