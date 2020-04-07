@@ -16,7 +16,7 @@ public class Battle {
     
     
     init(level: Int) {
-        self.player = Character(name: "Player", level: level)
+        self.player = Character(name: "Caio", level: level)
         
         switch level {
         case 1:

@@ -1,18 +1,5 @@
 import SpriteKit
 
-protocol BaseScene {
-    var sceneManager: SceneTransitionDelegate? { get set }
-}
-
-
-public enum SceneIdentifier {
-    case initialScene, battleScene1, battleScene2, battleScene3, decisionScene1, decisionScene2, decisionScene3, endScene
-}
-
-protocol SceneTransitionDelegate: class {
-    func transitionToScene(_ indentifier: SceneIdentifier)
-}
-
 public class SceneManager : SceneTransitionDelegate {
     
     //Attributes

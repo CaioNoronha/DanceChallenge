@@ -49,15 +49,20 @@ public class Character {
     private func setUpNodes() {
         
         if name == "Caio" {
-            node = SKSpriteNode(imageNamed: "Battle/Enemy/Player")
+            node = SKSpriteNode(imageNamed: "Battle/Player/Player")
             for i in 1...5 {
-                simpleAttackAnimate.append(SKTexture(imageNamed: "Battle/Player/\(level)/S.Attack/Battle_\(name)_\(level)_S.Attack_\(i)"))
+                simpleAttackAnimate.append(SKTexture(imageNamed:
+                    "Battle/Player/S.Attack/Battle_Player_S.Attack_\(i)"))
                 
-                especialAttackAnimate.append(SKTexture(imageNamed: "Battle/Player/\(level)/E.Attack/Battle_\(name)_\(level)_E.Attack_\(i)"))
+                especialAttackAnimate.append(SKTexture(imageNamed: "Battle/Player/E.Attack/Battle_Player_E.Attack_\(i)"))
                 
-                shieldAnimate.append(SKTexture(imageNamed: "Battle/Player/\(level)/Heal/Battle_\(name)_\(level)_Heal_\(i)"))
+                shieldAnimate.append(SKTexture(imageNamed: "Battle/Player/Defend/Battle_Player_Defend_\(i)"))
                 
             }
+            simpleAttackAnimate.append(SKTexture(imageNamed: "Battle/Player/Player"))
+            especialAttackAnimate.append(SKTexture(imageNamed: "Battle/Player/Player"))
+            shieldAnimate.append(SKTexture(imageNamed: "Battle/Player/Player"))
+
         } else {
             node = SKSpriteNode(imageNamed: "Battle/Enemy/\(level)/Enemy_\(level)")
             for i in 1...5 {
@@ -72,6 +77,9 @@ public class Character {
             especialAttackAnimate.append(SKTexture(imageNamed: "Battle/Enemy/\(level)/Enemy_\(level)"))
             shieldAnimate.append(SKTexture(imageNamed: "Battle/Enemy/\(level)/Enemy_\(level)"))
         }
+        
+        characterLabel.fontName = "Nunito Regular"
+        characterLabel.fontSize = 12
     }
     
     
@@ -82,7 +90,7 @@ public class Character {
             return simpleDamage
         }
         
-        if type == 2, especialAttack.use() {
+        if especialAttack.use() {
             characterLabel.text = "\(name) used Especial Attack!"
             animate(.especialAttack)
             return especialDamage

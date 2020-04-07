@@ -1,25 +1,5 @@
 import SpriteKit
 
-public protocol Observer: class {
-    func finishBattle()
-}
-
-extension BattleScene: Observer {
-    public func finishBattle() {
-        
-        switch level {
-        case 1:
-            sceneManager?.transitionToScene(.decisionScene1)
-        case 2:
-            sceneManager?.transitionToScene(.decisionScene2)
-        case 3:
-            sceneManager?.transitionToScene(.decisionScene3)
-        default:
-            sceneManager?.transitionToScene(.initialScene)
-        }
-    }
-}
-
 public class BattleScene: SKScene, BaseScene {
     
     //Sprites
@@ -88,8 +68,31 @@ public class BattleScene: SKScene, BaseScene {
         battle.enemy.characterLabel.position = CGPoint(x: width/1.48, y: height/1.4)
         self.addChild(battle.enemy.characterLabel)
         
+        //Player
         battle.player.node.position = CGPoint(x: width/4, y: height/4)
-        //self.addChild(battle.player.node)
+        self.addChild(battle.player.node)
+        
+        battle.player.hpNode.position = CGPoint(x: width/4, y: height/3.6)
+        self.addChild(battle.player.hpNode)
+        
+        battle.player.characterLabel.position = CGPoint(x: width/4, y: height/3.4)
+        self.addChild(battle.player.characterLabel)
+    }
+}
+
+extension BattleScene: Observer {
+    public func finishBattle() {
+        
+        switch level {
+        case 1:
+            sceneManager?.transitionToScene(.decisionScene1)
+        case 2:
+            sceneManager?.transitionToScene(.decisionScene2)
+        case 3:
+            sceneManager?.transitionToScene(.decisionScene3)
+        default:
+            sceneManager?.transitionToScene(.initialScene)
+        }
     }
 }
 
@@ -98,6 +101,8 @@ extension BattleScene {
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
+        
+        
         //Take the first touch
         let touch = touches.first
         //Touch in the screen position
@@ -105,11 +110,15 @@ extension BattleScene {
         // The knot is in that position now
         let touchedNode = self.atPoint(positionInScene!)
         
+        
         switch touchedNode.name {
+            
         case "Simple Button":
             battle.playerAct(.attack1)
+            
         case "Shield Button":
             battle.playerAct(.defend)
+
         case "Especial Button":
             battle.playerAct(.attack2)
            

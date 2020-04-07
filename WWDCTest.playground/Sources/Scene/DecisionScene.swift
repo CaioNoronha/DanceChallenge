@@ -61,7 +61,6 @@ public class DecisionScene: SKScene, BaseScene {
         ballon.zPosition = -1
         self.addChild(ballon)
         
-        
         //Message
         message.text = setEnemyMessage()
         message.fontSize = 16
