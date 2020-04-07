@@ -39,16 +39,19 @@ public class BattleScene: SKScene, BaseScene {
     
     //Methods
     func setUpScene() {
+        //Simple Attack
         simpleAttackButton.name = "Simple Button"
-        simpleAttackButton.position = CGPoint(x: width/1.84, y: height/4)
+        simpleAttackButton.position = CGPoint(x: width/1.69, y: height/4.5)
         self.addChild(simpleAttackButton)
         
+        //Defend Button
         shieldButton.name = "Shield Button"
-        shieldButton.position = CGPoint(x: width/1.28, y: height/4)
+        shieldButton.position = CGPoint(x: width/1.33, y: height/4.5)
         self.addChild(shieldButton)
         
-        especialAttackButton.name = "Especial Button"
-        especialAttackButton.position = CGPoint(x: width/1.5, y: height/6.5)
+        //Especial Button
+        especialAttackButton.name = "Special Button"
+        especialAttackButton.position = CGPoint(x: width/1.49, y: height/6.5)
         self.addChild(especialAttackButton)
         
         //Background
@@ -77,9 +80,7 @@ public class BattleScene: SKScene, BaseScene {
         self.addChild(battle.player.hpNode)
         
         battle.player.characterLabel.position = CGPoint(x: width/3.5, y: height/1.8)
-        self.addChild(battle.player.characterLabel)
-        
-        Music.shared.playMusic()
+        self.addChild(battle.player.characterLabel)        
     }
 }
 
@@ -122,7 +123,7 @@ extension BattleScene {
         case "Shield Button":
             battle.playerAct(.defend)
 
-        case "Especial Button":
+        case "Special Button":
             battle.playerAct(.attack2)
            
         default:

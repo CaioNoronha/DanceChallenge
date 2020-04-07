@@ -69,6 +69,7 @@ public class CutScene: SKScene, BaseScene {
         }
         
         if level == 1 {
+            Music.shared.playMusic()
             sceneManager?.transitionToScene(.battleScene1)
         } else {
             sceneManager?.transitionToScene(.initialScene)
