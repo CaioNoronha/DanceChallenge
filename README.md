@@ -1,7 +1,7 @@
 # Welcome to Dance Challenge!
  My Scholarship submission to WWDC 2020.
  
-An interactive scene to talk about the theme of judgment.
+An interactive scene to talk about the theme of _judgment_.
 Using mechanics that mix the things that most represent me: Dance, Geek and Games. 
 
 ## How it works?
@@ -13,6 +13,7 @@ The Game has 3 stages: Scenes, battles and decisions.
 ##Scenes
   Presented at the beginning and end of the interactive scene, to present the character's motivation and objectives and outcome 
   at the end of the scene. To continue in the scenes, just tap anywhere on the screen.
+  
   
 ###Battle
   The battle takes place 3 times during the scene, in different difficulties and against different enemies. 
