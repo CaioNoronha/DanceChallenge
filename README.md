@@ -10,12 +10,12 @@ Using mechanics that mix the things that most represent me: Dance, Geek and Game
   
 The Game has 3 stages: Scenes, battles and decisions.
   
-##Scenes
+## Scenes
   Presented at the beginning and end of the interactive scene, to present the character's motivation and objectives and outcome 
   at the end of the scene. To continue in the scenes, just tap anywhere on the screen.
   
   
-###Battle
+### Battle
   The battle takes place 3 times during the scene, in different difficulties and against different enemies. 
   It is turn-based to set up skill time and choose each competitor.
   You have 3 buttons to battle:
@@ -24,7 +24,7 @@ The Game has 3 stages: Scenes, battles and decisions.
   * Defend: Defend the enemy's next strike and reduce damage taken, with 2-turn cooldown.
   * Special Attack: Special attack that takes a lot of damage but contains 2-turn cooldown.
   
-##Decisions
+## Decisions
   Trim at the end of each battle to represent the important choices of the game. 
   You have 2 buttons to choose from, deciding the direction you want to take according to the opponent's speech.
   
@@ -34,4 +34,4 @@ The Game has 3 stages: Scenes, battles and decisions.
   The game was made to present and know who to trust and know who wants "your evil" during your life, and always give your best
   regardless of the opinions of those of the people
   
- ##I hope you like it! Thank you!
+ ## I hope you like it! Thank you!
